@@ -1,6 +1,8 @@
 # friendtracker
 FriendTraker
+
 Contexte
+
 Dans le but de faciliter les sorties entre amis, l’organisation et la gestion de ces dernières, nous souhaitons mettre en place une application permettant aux utilisateurs de pouvoir créer et gérer des groupes afin d’organiser des événements. On pourra déterminer les lieux, dates et heures de rencontre de ces événements ainsi que suivre l’avancée des personnes (le souhaitant) vers le lieu de rencontre. L’itinéraires des membres vers le lieu de rencontre sera calculé et affiché.
 Fonctionnalités de l’application
 L’application permettra de : 
