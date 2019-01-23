@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "686323093141",
+    "firebase_url": "https://friendtracker-43c20.firebaseio.com",
+    "project_id": "friendtracker-43c20",
+    "storage_bucket": "friendtracker-43c20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686323093141:android:c4f869fd2f83759e",
+        "android_client_info": {
+          "package_name": "com.example.pinbe.friendtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "686323093141-50go155d69pk5tlgrsimgntiedv1hpqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC11cccPKTP5lL6D_6Q6WH40hz45fPp8mw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
