@@ -22,6 +22,7 @@ public class AuthenticationActivity extends AppCompatActivity{
 
 
     private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener  authStateListener;
 
     private EditText inputEmail;
     private EditText inputPassword;
@@ -35,11 +36,6 @@ public class AuthenticationActivity extends AppCompatActivity{
 
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(AuthenticationActivity.this, MapsActivity.class));
-            finish();
-        }
-
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
         progressBar = findViewById(R.id.progressBar);
@@ -48,13 +44,11 @@ public class AuthenticationActivity extends AppCompatActivity{
         btnReset = findViewById(R.id.btn_reset_password);
 
         auth = FirebaseAuth.getInstance();
-        Log.i("Authenticate", "Trying to authenticate");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptLogin();
-                startActivity(new Intent(AuthenticationActivity.this, AuthenticationActivity.class));
             }
         });
 
@@ -102,10 +96,14 @@ public class AuthenticationActivity extends AppCompatActivity{
                             // If sign in fails, display a message to the user. If sign in succeeds
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
-                            if (!task.isSuccessful()) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AuthenticationActivity.this, "Registered.",
+                                        Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-                            } else {
-                                Toast.makeText(AuthenticationActivity.this, "Authentication failed." + task.getException(),
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(AuthenticationActivity.this, "Register failed." + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -129,6 +127,8 @@ public class AuthenticationActivity extends AppCompatActivity{
                             // signed in user can be handled in the listener.
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
+                                Toast.makeText(AuthenticationActivity.this, "Authenticated",
+                                        Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(AuthenticationActivity.this, MapsActivity.class));
                                 finish();
                             }
