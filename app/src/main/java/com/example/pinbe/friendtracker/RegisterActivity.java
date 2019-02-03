@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener  authStateListener;
 
     private EditText inputEmail, inputPassword, inputFirstname, inputLastname, inputPhoneNumber;
     private Button btnSignup, btnLogin;
