@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">FriendTracker</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Group_title">Gestion du groupe</string>
+    <string name="Group_name_label">Nom du groupe</string>
+    <string name="Group_name">Nom du groupe</string>
+    <string name="Group_description_label">Description du groupe</string>
+    <string name="Group_description">Tapez ici la description du groupe</string>
+    <string name="Group_send_modification">Enregistrer</string>
 </resources>
