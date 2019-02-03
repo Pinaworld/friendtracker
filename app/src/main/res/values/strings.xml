@@ -24,4 +24,7 @@
     <string name="btn_register">Se connecter</string>
     <string name="btn_link_to_login">Déjà inscrit ? Connectez-vous</string>
     <string name="btn_link_to_register">Pas encore Inscrit ? Inscrivez-vous</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
