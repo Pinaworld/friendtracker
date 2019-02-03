@@ -1,6 +1,5 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Database;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class DatabaseManager {
