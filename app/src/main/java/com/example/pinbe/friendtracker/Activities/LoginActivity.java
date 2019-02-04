@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
-        auth.signOut();
 
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
@@ -40,12 +39,11 @@ public class LoginActivity extends AppCompatActivity{
         btnLogin = findViewById(R.id.btn_login);
         btnReset = findViewById(R.id.btn_reset_password);
 
-        auth = FirebaseAuth.getInstance();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptLogin();
+                finish();
             }
         });
 
@@ -69,6 +67,7 @@ public class LoginActivity extends AppCompatActivity{
             Toast.makeText(LoginActivity.this, "Connection Successfull." ,
                     Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+            finish();
         }
     }
 
