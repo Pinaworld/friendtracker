@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
         mFirebaseInstance = FirebaseDatabase.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+
 
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
@@ -53,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
 
         auth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 register();
-                finish();
             }
         });
     }
@@ -99,8 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 createUser(email, password, lastName, firstName, phoneNumber);
                                 Toast.makeText(RegisterActivity.this, "Registered.",
                                         Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-                                finish();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
                                         Toast.LENGTH_SHORT).show();
