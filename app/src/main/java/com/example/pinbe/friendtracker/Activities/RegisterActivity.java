@@ -52,8 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignup = findViewById(R.id.btn_signup);
         btnLogin = findViewById(R.id.btn_login);
 
-        auth = FirebaseAuth.getInstance();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 register();
-                finish();
             }
         });
     }
@@ -100,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Registered.",
                                         Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-                                finish();
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
                                         Toast.LENGTH_SHORT).show();
