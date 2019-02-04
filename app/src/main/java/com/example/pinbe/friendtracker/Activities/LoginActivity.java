@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 attemptLogin();
+                finish();
             }
         });
 
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity{
             Toast.makeText(LoginActivity.this, "Connection Successfull." ,
                     Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),MapsActivity.class));
+            finish();
         }
     }
 
