@@ -1,10 +1,7 @@
 package com.example.pinbe.friendtracker.Activities;
 
-import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.FragmentActivity;
 
 import com.example.pinbe.friendtracker.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
