@@ -2,7 +2,6 @@
     <string name="app_name">FriendTracker</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Inscription</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -25,7 +24,4 @@
     <string name="title_activity_main">FriendTracker</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
