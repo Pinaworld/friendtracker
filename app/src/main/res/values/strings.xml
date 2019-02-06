@@ -24,7 +24,14 @@
     <string name="title_activity_main">FriendTracker</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="members_button">Membres</string>
+    <string name="group_managing_button">Gestion</string>
+    <string name="appointment_creation_button">Créer un rendez-vous</string>
+    <string name="friends_button">Mes amis</string>
+    <string name="friends_adding_button">Ajouter un ami</string>
+    <string name="appointments_button">Mes rendez-vous</string>
+    <string name="profile_button">Profil</string>
+    <string name="parameters_button">Paramètres</string>
+    <string name="title_activity_appointments">AppointmentsActivity</string>
+    <string name="title_activity_friends">FriendsActivity</string>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.MenuGroupFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        >
+
+        <Button
+            android:id="@+id/membersButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/members_button"
+            android:layout_marginRight="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            />
+
+        <Button
+            android:id="@+id/appointmentsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_creation_button"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/groupsManagingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/group_managing_button"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+</FrameLayout>

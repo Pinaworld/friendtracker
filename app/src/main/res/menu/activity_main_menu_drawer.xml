@@ -4,34 +4,16 @@
     <item
         android:id="@+id/menu_groups"
         android:icon="@drawable/group"
-        android:title="Mes Groupes"
-        android:visible="true"
+        android:title="Groupes"
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_friends"
         android:icon="@drawable/friends"
-        android:title="Mes Amis"
-        android:visible="true"
+        android:title="Amis"
         app:showAsAction="always" />
     <item
-        android:id="@+id/menu_appointments"
-        android:icon="@drawable/appointment"
+        android:id="@+id/menu_parameters"
+        android:icon="@drawable/parameters"
         android:title="Paramètres"
-        android:visible="true"
         app:showAsAction="always" />
-
-        <item
-            android:id="@+id/menu"
-            android:icon="@drawable/parameters"
-            android:title="Mes Rendez-vous"
-            android:visible="true"
-            app:showAsAction="always"
-            app:actionViewClass="android.widget.Spinner">
-            <menu>
-                <item
-                    android:id="@+id/menu_profile"
-                    android:icon="@drawable/profile"
-                    android:title="Mon profil"/>
-            </menu>
-        </item>
 </menu>

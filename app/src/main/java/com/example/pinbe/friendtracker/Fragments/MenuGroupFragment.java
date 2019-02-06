@@ -9,22 +9,18 @@ import android.view.ViewGroup;
 
 import com.example.pinbe.friendtracker.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class GroupeCreationFragment extends Fragment {
+
+public class MenuGroupFragment extends Fragment {
 
 
-    public GroupeCreationFragment() {
-        // Required empty public constructor
+    public MenuGroupFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_groupe_creation, container, false);
+
+        return inflater.inflate(R.layout.fragment_menu_group, container, false);
     }
 
 }

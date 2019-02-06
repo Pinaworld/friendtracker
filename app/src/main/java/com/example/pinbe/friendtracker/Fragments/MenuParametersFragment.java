@@ -12,10 +12,10 @@ import com.example.pinbe.friendtracker.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AppointmentCreationFragment extends Fragment {
+public class MenuParametersFragment extends Fragment {
 
 
-    public AppointmentCreationFragment() {
+    public MenuParametersFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class AppointmentCreationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appointment_creation, container, false);
+        return inflater.inflate(R.layout.fragment_menu_parameters, container, false);
     }
 
 }
