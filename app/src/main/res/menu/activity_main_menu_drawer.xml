@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_groups"
+        android:icon="@drawable/group"
+        android:title="Mes Groupes"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_friends"
+        android:icon="@drawable/friends"
+        android:title="Mes Amis"
+        android:visible="true"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_appointments"
+        android:icon="@drawable/appointment"
+        android:title="Paramètres"
+        android:visible="true"
+        app:showAsAction="always" />
 
-    <group android:checkableBehavior="single">
-        <item android:title="Application">
+        <item
+            android:id="@+id/menu"
+            android:icon="@drawable/parameters"
+            android:title="Mes Rendez-vous"
+            android:visible="true"
+            app:showAsAction="always"
+            app:actionViewClass="android.widget.Spinner">
             <menu>
                 <item
-                    android:id="@+id/activity_main_drawer_groups"
-                    android:icon="@drawable/ic_launcher_foreground"
-                    android:title="Mes Groupes" />
-                <item
-                    android:id="@+id/activity_main_drawer_friends"
-                    android:icon="@drawable/ic_launcher_foreground"
-                    android:title="Mes Amis" />
-                <item
-                    android:id="@+id/activity_main_drawer_"
-                    android:icon="@drawable/ic_launcher_foreground"
-                    android:title="Mes Rendez-vous" />
-
+                    android:id="@+id/menu_profile"
+                    android:icon="@drawable/profile"
+                    android:title="Mon profil"/>
             </menu>
         </item>
-    </group>
-
-    <item android:title="Paramètres">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/activity_main_drawer_profile"
-                    android:icon="@drawable/ic_launcher_foreground"
-                    android:title="" />
-                <item
-                    android:id="@+id/activity_main_drawer_settings"
-                    android:icon="@drawable/ic_launcher_foreground"
-                    android:title="" />
-            </group>
-        </menu>
-    </item>
-
 </menu>
