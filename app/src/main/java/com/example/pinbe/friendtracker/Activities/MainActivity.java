@@ -22,27 +22,17 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private Fragment currentMenuFragment;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        frameLayout = findViewById(R.id.activity_main_frame_layout);
+
         this.configureToolBar();
-
-        FrameLayout frameLayout = findViewById(R.id.activity_main_frame_layout);
-        frameLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.remove(currentMenuFragment);
-                    ft.commit();
-
-                    return false;
-            }
-        });
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.activity_main_frame_layout, new MapFragment(), "FRAGMENTS").commitAllowingStateLoss();
+        this.initFragment();
     }
 
     @Override
@@ -67,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
         setMenuFragment();
         return(super.onOptionsItemSelected(item));
+    }
+
+    public void initFragment(){
+        frameLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.remove(currentMenuFragment);
+                ft.commit();
+
+                return false;
+            }
+        });
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.activity_main_frame_layout, new MapFragment(), "FRAGMENTS").commitAllowingStateLoss();
     }
 
     public void setMenuFragment(){

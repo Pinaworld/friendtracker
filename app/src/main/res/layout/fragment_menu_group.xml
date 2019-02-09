@@ -15,11 +15,12 @@
         >
 
         <Button
-            android:id="@+id/membersButton"
+            android:id="@+id/groupsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/members_button"
+            android:text="@string/groups_button"
             android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/group"
             android:textAppearance="@style/TextAppearance.AppCompat"
             />
 
@@ -28,15 +29,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/appointment_creation_button"
+            android:drawableLeft="@drawable/appointment"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:layout_marginRight="10dp" />
 
-        <Button
-            android:id="@+id/groupsManagingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/group_managing_button"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:layout_marginRight="10dp" />
     </LinearLayout>
 </FrameLayout>

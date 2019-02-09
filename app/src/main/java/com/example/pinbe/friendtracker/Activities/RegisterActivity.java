@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 createUser(email, password, lastName, firstName, phoneNumber);
                                 Toast.makeText(RegisterActivity.this, "Registered.",
                                         Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),

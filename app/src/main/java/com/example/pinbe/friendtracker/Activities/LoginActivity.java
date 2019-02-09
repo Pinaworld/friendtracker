@@ -62,9 +62,6 @@ public class LoginActivity extends AppCompatActivity{
         });
 
         if(auth.getCurrentUser()!= null){
-
-            Toast.makeText(LoginActivity.this, "Connection Successfull." ,
-                    Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
     }
@@ -86,8 +83,7 @@ public class LoginActivity extends AppCompatActivity{
                             // signed in user can be handled in the listener.
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Authenticated",
-                                        Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
                             else {
