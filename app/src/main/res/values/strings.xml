@@ -36,4 +36,11 @@
     <string name="title_activity_groups">GroupsActivity</string>
     <string name="title_activity_parameters">ParametersActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="on_foot">on_foot</string>
+    <string name="in_vehicle">in_vehicle</string>
+    <string name="on_bicycle">on_bicycle</string>
+    <string name="walking">walking</string>
+    <string name="running">running</string>
+    <string name="tilting">tilting</string>
+    <string name="standing">standing</string>
 </resources>
