@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity{
         });
 
         if(auth.getCurrentUser()!= null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
         }
     }
 
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity{
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
                                 finish();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MapsActivity.class));
                             }
                             else {
                                 Toast.makeText(LoginActivity.this, "Impossible to login." + task.getException(),

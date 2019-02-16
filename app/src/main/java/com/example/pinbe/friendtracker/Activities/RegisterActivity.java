@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Registered.",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Register failed." + task.getException(),
                                         Toast.LENGTH_SHORT).show();
