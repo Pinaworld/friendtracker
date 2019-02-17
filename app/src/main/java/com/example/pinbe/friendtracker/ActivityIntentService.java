@@ -60,6 +60,6 @@ public class ActivityIntentService extends IntentService {
     private void broadcastActivity(String activity) {
         Intent intent = new Intent(Constants.DETECTED_ACTIVITY);
         intent.putExtra("activity", activity);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        sendBroadcast(intent);
     }
 }

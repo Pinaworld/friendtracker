@@ -1,6 +1,5 @@
 package com.example.pinbe.friendtracker.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,9 +40,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-
-import static com.example.pinbe.friendtracker.Constants.DETECTED_ACTIVITY;
-import static com.example.pinbe.friendtracker.Constants.LOCATION_UPDATE;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -121,7 +117,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-
         setMapActions();
         updateLocationUI();
         initLocation();
@@ -164,6 +159,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (intent.getAction().equals(Constants.DETECTED_ACTIVITY)) {
                     String detectedActivity = intent.getStringExtra("activity");
+                    Log.i(ACTIVITY_SERVICE, detectedActivity);
                     currentActivity = detectedActivity;
                     setMarker();
                 }
@@ -180,10 +176,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void startServices() {
-       Intent intent = new Intent(this, BackgroundDetectedActivitiesService.class);
-       startService(intent);
         Intent intentLocation = new Intent(this, LocationIntentService.class);
         startService(intentLocation);
+        Intent intent = new Intent(this, BackgroundDetectedActivitiesService.class);
+        startService(intent);
+
     }
 
     private void stopServices() {
@@ -231,7 +228,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, Constants.DEFAULT_ZOOM));
         markerOption = new MarkerOptions().position(location).title("Moi");
         marker = googleMap.addMarker(markerOption);
-        setMarker();
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 
@@ -241,7 +237,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             LatLng location = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
 
             marker.setPosition(location);
-            setMarker();
+
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, Constants.DEFAULT_ZOOM));
         } else {
             Log.w(Constants.TAG, "Current location is null. Using defaults.");
