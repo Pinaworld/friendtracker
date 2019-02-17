@@ -1,16 +1,17 @@
 <resources>
     <string name="app_name">FriendTracker</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_login">Inscription</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="title_activity_register">Inscription</string>
+    <string name="title_activity_login">Connexion</string>
+    <string name="title_activity_main">FriendTracker</string>
+    <string name="title_activity_appointments">AppointmentsActivity</string>
+    <string name="title_activity_friends">FriendsActivity</string>
+    <string name="title_activity_groups">GroupsActivity</string>
+    <string name="title_activity_parameters">ParametersActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+
     <string name="hint_email">Adresse Mail</string>
     <string name="hint_password">Saisissez votre mot de passe</string>
     <string name="hint_firstname">Nom</string>
@@ -21,9 +22,13 @@
     <string name="btn_register">Se connecter</string>
     <string name="btn_link_to_login">Déjà inscrit ? Connectez-vous</string>
     <string name="btn_link_to_register">Pas encore Inscrit ? Inscrivez-vous</string>
-    <string name="title_activity_main">FriendTracker</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
     <string name="groups_button">Groupes</string>
     <string name="appointment_creation_button">Mes sorties</string>
     <string name="friends_button">Mes amis</string>
@@ -31,11 +36,8 @@
     <string name="appointments_button">Mes rendez-vous</string>
     <string name="profile_button">Profil</string>
     <string name="parameters_button">Paramètres</string>
-    <string name="title_activity_appointments">AppointmentsActivity</string>
-    <string name="title_activity_friends">FriendsActivity</string>
-    <string name="title_activity_groups">GroupsActivity</string>
-    <string name="title_activity_parameters">ParametersActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+
+
     <string name="on_foot">on_foot</string>
     <string name="in_vehicle">in_vehicle</string>
     <string name="on_bicycle">on_bicycle</string>

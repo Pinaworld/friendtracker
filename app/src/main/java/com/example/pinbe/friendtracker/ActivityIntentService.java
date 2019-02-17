@@ -4,16 +4,19 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 public class ActivityIntentService extends IntentService {
 
+    protected static final String TAG = ActivityIntentService.class.getSimpleName();
+
     public ActivityIntentService() {
-        super(Constants.TAG);
+        super(TAG);
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,17 +27,16 @@ public class ActivityIntentService extends IntentService {
         if (ActivityRecognitionResult.hasResult(intent)) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
 
-            String detectedActivities = getActivityString(getApplicationContext(), result.getMostProbableActivity().getType());
+            String detectedActivity = getActivityString(getApplicationContext(), result.getMostProbableActivity().getType());
 
-            PreferenceManager.getDefaultSharedPreferences(this)
-                    .edit()
-                    .putString(Constants.DETECTED_ACTIVITY, detectedActivities)
-                    .apply();
+            broadcastActivity(detectedActivity);
         }
+
     }
 
     public static String getActivityString(Context context, int detectedActivityType) {
         Resources resources = context.getResources();
+
         switch(detectedActivityType) {
             case DetectedActivity.ON_BICYCLE:
                 return resources.getString(R.string.on_bicycle);
@@ -53,5 +55,11 @@ public class ActivityIntentService extends IntentService {
             default:
                 return resources.getString(R.string.tilting);
         }
+    }
+
+    private void broadcastActivity(String activity) {
+        Intent intent = new Intent(Constants.DETECTED_ACTIVITY);
+        intent.putExtra("activity", activity);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }
