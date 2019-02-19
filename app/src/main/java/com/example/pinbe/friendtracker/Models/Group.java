@@ -1,20 +1,25 @@
 package com.example.pinbe.friendtracker.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
 
-    private String name;
-    private String description;
-    private List<Appointment> appointments;
-    private List<User> members;
+    public String name;
+    public String description;
+    public ArrayList<String> appointments;
+    public ArrayList<String> membersId;
+    public String ownerId;
 
     public Group(){
     }
 
-    public Group(String name, String description) {
+    public Group(String name, String description, ArrayList<String> appointments, ArrayList<String> membersId, String ownerId) {
         this.name = name;
         this.description = description;
+        this.appointments = appointments;
+        this.membersId = membersId;
+        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -33,19 +38,27 @@ public class Group {
         this.description = description;
     }
 
-    public List<Appointment> getAppointments() {
+    public ArrayList<String> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(List<Appointment> appointments) {
+    public void setAppointments(ArrayList<String> appointments) {
         this.appointments = appointments;
     }
 
-    public List<User> getMembers() {
-        return members;
+    public ArrayList<String> getMembersId() {
+        return membersId;
     }
 
-    public void setMembers(List<User> members) {
-        this.members = members;
+    public void setMembersId(ArrayList<String> membersId) {
+        this.membersId = membersId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

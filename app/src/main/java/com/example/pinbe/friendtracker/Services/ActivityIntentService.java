@@ -1,11 +1,12 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Services;
 
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v4.content.LocalBroadcastManager;
 
+import com.example.pinbe.friendtracker.Constants;
+import com.example.pinbe.friendtracker.R;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 

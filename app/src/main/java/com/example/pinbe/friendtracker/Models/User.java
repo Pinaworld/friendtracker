@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
-    private List<User> friends;
+    private List<String> friendsId;
 
     // Default constructor required for calls to database
     public User() {
@@ -62,11 +62,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<User> getFriends() {
-        return friends;
+    public List<String> getFriendsId() {
+        return friendsId;
     }
 
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
+    public void setFriendsId(List<String> friendsId) {
+        this.friendsId = friendsId;
     }
 }

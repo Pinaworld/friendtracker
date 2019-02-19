@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Services;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.example.pinbe.friendtracker.Constants;
 
 import static com.example.pinbe.friendtracker.Constants.LOCATION_UPDATE;
 import static com.example.pinbe.friendtracker.Constants.UPDATE_INTERVAL_IN_MILLISECONDS;

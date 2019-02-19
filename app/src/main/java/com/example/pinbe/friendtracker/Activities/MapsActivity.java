@@ -20,12 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.pinbe.friendtracker.BackgroundDetectedActivitiesService;
+import com.example.pinbe.friendtracker.Services.BackgroundDetectedActivitiesService;
 import com.example.pinbe.friendtracker.Constants;
 import com.example.pinbe.friendtracker.Fragments.MenuFriendsFragment;
 import com.example.pinbe.friendtracker.Fragments.MenuGroupFragment;
 import com.example.pinbe.friendtracker.Fragments.MenuParametersFragment;
-import com.example.pinbe.friendtracker.LocationIntentService;
+import com.example.pinbe.friendtracker.Services.LocationIntentService;
 import com.example.pinbe.friendtracker.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -58,6 +59,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LatLng mDefaultLocation;
 
     private FirebaseAuth auth;
+    private String uid;
 
     private String currentActivity;
     BroadcastReceiver broadcastReceiver;
@@ -69,10 +71,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         auth = FirebaseAuth.getInstance();
 
+        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d("LOG_Login", "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    Log.d("LOG_Login", "onAuthStateChanged:signed_out");
+                    }
+
+
+                }
+            });
+
         if (auth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

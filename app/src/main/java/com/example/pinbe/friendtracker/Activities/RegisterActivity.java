@@ -5,29 +5,30 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.example.pinbe.friendtracker.Models.User;
 import com.example.pinbe.friendtracker.R;
+import com.example.pinbe.friendtracker.Services.UserFirebaseHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import static com.example.pinbe.friendtracker.Services.Database.getDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
+    UserFirebaseHelper userFirebaseHelper;
 
     private EditText inputEmail, inputPassword, inputFirstname, inputLastname, inputPhoneNumber;
     private Button btnSignup, btnLogin;
@@ -40,7 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
-        mFirebaseInstance = FirebaseDatabase.getInstance();
+
+        mFirebaseInstance = getDatabase();
+        mFirebaseDatabase =  mFirebaseInstance.getReference();
+
+        userFirebaseHelper = new UserFirebaseHelper(mFirebaseDatabase);
 
 
         inputEmail = findViewById(R.id.email);
@@ -53,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
 
         auth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,34 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         User user = new User(firstname, lastname, email, password, phoneNumber);
 
-        mFirebaseDatabase.child(userId).setValue(user);
-
-        addUserChangeListener();
-    }
-
-    private void addUserChangeListener() {
-        // User data change listener
-        mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-
-                // Check for null
-                if (user == null) {
-                    Log.e("USER_CREATION", "User data is null!");
-                    return;
-                }
-
-                Log.e("USER_CREATION", "User data is changed: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPhoneNumber() + ", PASSWORD = *******");
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.e("USER_CREATION", "Failed to read user", error.toException());
-            }
-        });
+        userFirebaseHelper.save(user, userId);
     }
 
 }

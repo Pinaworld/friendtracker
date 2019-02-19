@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Services;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.pinbe.friendtracker.Constants;
 import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
