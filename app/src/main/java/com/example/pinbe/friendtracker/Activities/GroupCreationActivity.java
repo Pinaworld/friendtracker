@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import static com.example.pinbe.friendtracker.Services.Database.getDatabase;
+import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
 
 public class GroupCreationActivity extends AppCompatActivity {
 
@@ -72,10 +72,7 @@ public class GroupCreationActivity extends AppCompatActivity {
         membersList.add("");
 
         if(validateInputs(name)){
-
-            Group group = new Group(name, description, appointmentList, membersList, userId);
-
-            Boolean result =  save(group);
+            Boolean result =  save(name, description, appointmentList, membersList, userId);
             if(result){
                 finish();
             }
@@ -97,26 +94,28 @@ public class GroupCreationActivity extends AppCompatActivity {
         return true;
     }
 
-    public Boolean save(Group group)
+    public Boolean save(String name, String description, ArrayList<String> appointmentList, ArrayList<String> membersList, String userId)
     {
-        if(group==null)
-        {
-            saved=false;
-        }else {
-
             try
             {
-                mFirebaseDatabase.push().setValue(group);
+                String groupId = mFirebaseDatabase.push().getKey();
+
+                Group group = new Group(name, description, appointmentList, membersList, userId, groupId);
+
+                ArrayList<String> membersID = new ArrayList<>();
+
+                membersID.add(group.getOwnerId());
+                group.setMembersId(membersID);
+
+                mFirebaseDatabase.child(groupId).setValue(group);
                 addGroupChangeListener(group);
+
                 saved=true;
             }catch (DatabaseException e)
             {
                 e.printStackTrace();
                 saved=false;
             }
-
-        }
-
         return saved;
     }
 

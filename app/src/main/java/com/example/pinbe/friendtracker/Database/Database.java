@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker.Services;
+package com.example.pinbe.friendtracker.Database;
 
 import com.google.firebase.database.FirebaseDatabase;
 

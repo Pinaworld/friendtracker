@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker.Services;
+package com.example.pinbe.friendtracker.Database;
 
 import android.util.Log;
 

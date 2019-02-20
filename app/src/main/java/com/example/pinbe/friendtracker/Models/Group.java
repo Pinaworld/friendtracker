@@ -10,16 +10,18 @@ public class Group {
     public ArrayList<String> appointments;
     public ArrayList<String> membersId;
     public String ownerId;
+    public String id;
 
     public Group(){
     }
 
-    public Group(String name, String description, ArrayList<String> appointments, ArrayList<String> membersId, String ownerId) {
+    public Group(String name, String description, ArrayList<String> appointments, ArrayList<String> membersId, String ownerId, String id) {
         this.name = name;
         this.description = description;
         this.appointments = appointments;
         this.membersId = membersId;
         this.ownerId = ownerId;
+        this.id = id;
     }
 
     public String getName() {
@@ -60,5 +62,13 @@ public class Group {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

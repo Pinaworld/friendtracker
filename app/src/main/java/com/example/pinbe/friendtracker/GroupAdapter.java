@@ -2,21 +2,26 @@ package com.example.pinbe.friendtracker;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.pinbe.friendtracker.Models.Group;
 
 import java.util.ArrayList;
 
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder> {
 
     Context c;
-    ArrayList<String> groups;
+    ArrayList<Group> groups;
+    CustomClickListener listener;
 
-    public GroupAdapter(Context c, ArrayList<String> groups) {
+    public GroupAdapter(Context c, ArrayList<Group> groups, CustomClickListener listener) {
         this.c = c;
         this.groups = groups;
+        this.listener = listener;
     }
 
     @Override
@@ -27,7 +32,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.nameTxt.setText(groups.get(position));
+        final Group group = groups.get(position);
+        holder.nameTxt.setText(group.getName());
+        holder.nameTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(v, group);
+            }
+        });
     }
 
 
@@ -36,7 +48,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
         return groups.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends ViewHolder {
         Button nameTxt;
 
         public MyViewHolder(View itemView) {
