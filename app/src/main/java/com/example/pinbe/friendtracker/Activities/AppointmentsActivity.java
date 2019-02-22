@@ -71,10 +71,9 @@ public class AppointmentsActivity extends AppCompatActivity {
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if(group == null) {
-            createAppointmentButton.setVisibility(0);
+            createAppointmentButton.setVisibility(View.GONE);
             haveInitialGroup = false;
             getAllappointments();
-
         }
         else{
             haveInitialGroup = true;
@@ -85,6 +84,7 @@ public class AppointmentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentFragment = new AppointmentCreationFragment();
+                ((AppointmentCreationFragment) currentFragment).getGroupAndUserId(group.getId(), userId);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.appointmentFrameLayout, currentFragment)
                         .commit();
@@ -156,9 +156,9 @@ public class AppointmentsActivity extends AppCompatActivity {
                 }catch(Exception e){
                     Log.i("ERROR", e.getMessage());
                 }
-                if(haveInitialGroup){
-                    setAdapter();
-                }
+
+                setAdapter();
+
             }
 
             @Override

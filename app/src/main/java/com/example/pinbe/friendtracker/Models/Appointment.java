@@ -12,11 +12,13 @@ public class Appointment implements Serializable {
     private String description;
     private String groupId;
     private Date appointmentDate;
+    private String id;
+    private String creatorId;
 
     public Appointment() {
     }
 
-    public Appointment(String name, String address, int postalCode, String city, String description, Date appointmentDate, String groupId) {
+    public Appointment(String name, String address, int postalCode, String city, String description, Date appointmentDate, String groupId, String creatorId) {
         this.name = name;
         this.address = address;
         this.postalCode = postalCode;
@@ -24,6 +26,23 @@ public class Appointment implements Serializable {
         this.description = description;
         this.groupId = groupId;
         this.appointmentDate = appointmentDate;
+        this.creatorId = creatorId;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getAppointmentDate() {
