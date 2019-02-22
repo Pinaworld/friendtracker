@@ -182,8 +182,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
                 if (intent.getAction().equals(Constants.LOCATION_UPDATE)) {
-                    Location location = (Location) intent.getExtras().get("Location");
-                    setLocation(location);
+                    if(googleMap != null){
+                        Location location = (Location) intent.getExtras().get("Location");
+                        setLocation(location);
+                    }
+
                 }
             }
         };
