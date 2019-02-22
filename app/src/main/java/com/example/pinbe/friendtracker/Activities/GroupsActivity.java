@@ -1,6 +1,5 @@
 package com.example.pinbe.friendtracker.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 
-import com.example.pinbe.friendtracker.CustomClickListener;
+import com.example.pinbe.friendtracker.GroupCustomClickListener;
+import com.example.pinbe.friendtracker.Fragments.GroupCreationFragment;
 import com.example.pinbe.friendtracker.Fragments.GroupFragment;
 import com.example.pinbe.friendtracker.GroupAdapter;
 import com.example.pinbe.friendtracker.Models.Group;
@@ -37,8 +36,8 @@ public class GroupsActivity extends AppCompatActivity {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
-    private CustomClickListener clickListener;
-    private Fragment currentMenuFragment;
+    private GroupCustomClickListener clickListener;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +70,9 @@ public class GroupsActivity extends AppCompatActivity {
                     Log.i("ERROR", e.getMessage());
                 }
 
-                groupRecyclerView.setAdapter(new GroupAdapter(getApplicationContext(), groups, new CustomClickListener() {
+                groupRecyclerView.setAdapter(new GroupAdapter(getApplicationContext(), groups, new GroupCustomClickListener() {
                     @Override
-                    public void onItemClick(View v, Group group) {
+                    public void onGroupItemClick(View v, Group group) {
                         setGroupFragment(group);
                     }
                 }));
@@ -88,16 +87,19 @@ public class GroupsActivity extends AppCompatActivity {
         createGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GroupsActivity.this, GroupCreationActivity.class));
+                currentFragment = new GroupCreationFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.groupFrameLayout, currentFragment)
+                        .commit();
             }
         });
     }
 
     private void setGroupFragment(Group group) {
-        currentMenuFragment = new GroupFragment();
-        ((GroupFragment) currentMenuFragment).getGroup(group);
+        currentFragment = new GroupFragment();
+        ((GroupFragment) currentFragment).getGroup(group);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.groupFrameLayout, currentMenuFragment)
+        ft.replace(R.id.groupFrameLayout, currentFragment)
                 .commit();
 
     }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AppointmentCreationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/appointmentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nom de l'évènement"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/appointmentCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ville"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/appointmentPostalCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Code postal"
+            android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/appointmentAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adresse"
+            android:inputType="textPersonName" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Date de l'évènement: " >
+        </TextView>
+        <DatePicker
+            android:id="@+id/appointmentDate"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:datePickerMode="spinner"
+            android:text="Date de l'évènement"
+            android:calendarViewShown="false"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Heure de l'évènement: " >
+        </TextView>
+        <TimePicker
+            android:id="@+id/appointmentTime"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:timePickerMode="spinner"/>
+
+        <EditText
+            android:id="@+id/appointmentDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Description de l'évènement"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/createAppointmentButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Créer l'évènement" />
+    </LinearLayout>
+
+</FrameLayout>

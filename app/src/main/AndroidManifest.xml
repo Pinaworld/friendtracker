@@ -19,10 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.GroupCreationActivity"
-            android:label="@string/title_activity_group_creation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".Activities.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />

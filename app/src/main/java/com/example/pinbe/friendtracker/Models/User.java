@@ -1,8 +1,9 @@
 package com.example.pinbe.friendtracker.Models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private String firstname;
     private String lastname;
     private String email;

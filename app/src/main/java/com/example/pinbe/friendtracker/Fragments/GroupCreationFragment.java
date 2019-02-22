@@ -1,11 +1,13 @@
-package com.example.pinbe.friendtracker.Activities;
+package com.example.pinbe.friendtracker.Fragments;
+
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,7 +26,10 @@ import java.util.ArrayList;
 
 import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
 
-public class GroupCreationActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class GroupCreationFragment extends Fragment {
 
     private Button createGroupButton;
     private EditText groupName;
@@ -33,19 +38,30 @@ public class GroupCreationActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth auth;
     private Boolean saved=null;
+    private ViewGroup inflatedView;
 
     private String userId;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_creation);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public GroupCreationFragment() {
+        // Required empty public constructor
+    }
 
-        createGroupButton = findViewById(R.id.createGroupButton);
-        groupName = findViewById(R.id.groupName);
-        groupeDescription = findViewById(R.id.groupDescription);
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        this.inflatedView = container;
+        return inflater.inflate(R.layout.fragment_group_creation, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        createGroupButton = inflatedView.findViewById(R.id.createGroupButton);
+        groupName = inflatedView.findViewById(R.id.groupName);
+        groupeDescription = inflatedView.findViewById(R.id.groupDescription);
 
         auth = FirebaseAuth.getInstance();
         mFirebaseInstance = getDatabase();
@@ -59,25 +75,23 @@ public class GroupCreationActivity extends AppCompatActivity {
                 createGroup();
             }
         });
-
     }
 
     private void createGroup(){
         String name = groupName.getText().toString();
         String description = groupeDescription.getText().toString();
-        ArrayList<String> appointmentList = new ArrayList<String>();
         ArrayList<String> membersList = new ArrayList<String>();
 
-        appointmentList.add("");
         membersList.add("");
 
         if(validateInputs(name)){
-            Boolean result =  save(name, description, appointmentList, membersList, userId);
+            Boolean result =  save(name, description, membersList, userId);
             if(result){
-                finish();
+                Toast.makeText(getContext(), "Groupe Créé.",
+                        Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(GroupCreationActivity.this, "Error during group creation.",
+                Toast.makeText(getContext(), "Error during group creation.",
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -87,35 +101,35 @@ public class GroupCreationActivity extends AppCompatActivity {
     private boolean validateInputs(String name){
 
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getApplicationContext(), "Veuillez indiquer le nom du groupe", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Veuillez indiquer le nom du groupe", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         return true;
     }
 
-    public Boolean save(String name, String description, ArrayList<String> appointmentList, ArrayList<String> membersList, String userId)
+    public Boolean save(String name, String description, ArrayList<String> membersList, String userId)
     {
-            try
-            {
-                String groupId = mFirebaseDatabase.push().getKey();
+        try
+        {
+            String groupId = mFirebaseDatabase.push().getKey();
 
-                Group group = new Group(name, description, appointmentList, membersList, userId, groupId);
+            Group group = new Group(name, description, membersList, userId, groupId);
 
-                ArrayList<String> membersID = new ArrayList<>();
+            ArrayList<String> membersID = new ArrayList<>();
 
-                membersID.add(group.getOwnerId());
-                group.setMembersId(membersID);
+            membersID.add(group.getOwnerId());
+            group.setMembersId(membersID);
 
-                mFirebaseDatabase.child(groupId).setValue(group);
-                addGroupChangeListener(group);
+            mFirebaseDatabase.child(groupId).setValue(group);
+            addGroupChangeListener(group);
 
-                saved=true;
-            }catch (DatabaseException e)
-            {
-                e.printStackTrace();
-                saved=false;
-            }
+            saved=true;
+        }catch (DatabaseException e)
+        {
+            e.printStackTrace();
+            saved=false;
+        }
         return saved;
     }
 
@@ -143,6 +157,5 @@ public class GroupCreationActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

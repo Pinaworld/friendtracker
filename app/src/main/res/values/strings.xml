@@ -4,11 +4,11 @@
     <string name="title_activity_register">Inscription</string>
     <string name="title_activity_login">Connexion</string>
     <string name="title_activity_main">FriendTracker</string>
-    <string name="title_activity_appointments">AppointmentsActivity</string>
-    <string name="title_activity_friends">FriendsActivity</string>
-    <string name="title_activity_groups">GroupsActivity</string>
+    <string name="title_activity_appointments">Sorties</string>
+    <string name="title_activity_friends">Amis</string>
+    <string name="title_activity_groups">Groupes</string>
     <string name="title_activity_parameters">ParametersActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_profile">Mon profil</string>
 
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
@@ -45,9 +45,9 @@
     <string name="running">running</string>
     <string name="tilting">tilting</string>
     <string name="standing">standing</string>
-    <string name="title_activity_test">TestActivity</string>
+
+    <string name="title_activity_group_creation">Groupes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_group_creation">GroupCreationActivity</string>
 </resources>

@@ -8,19 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.pinbe.friendtracker.Models.Group;
+import com.example.pinbe.friendtracker.Models.Appointment;
 
 import java.util.ArrayList;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder> {
+public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.MyViewHolder> {
 
     Context c;
-    ArrayList<Group> groups;
-    GroupCustomClickListener listener;
+    ArrayList<Appointment> appointments;
+    AppointmentCustomClickListener listener;
 
-    public GroupAdapter(Context c, ArrayList<Group> groups, GroupCustomClickListener listener) {
+    public AppointmentAdapter(Context c, ArrayList<Appointment> appointments, AppointmentCustomClickListener listener) {
         this.c = c;
-        this.groups = groups;
+        this.appointments = appointments;
         this.listener = listener;
     }
 
@@ -32,12 +32,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Group group = groups.get(position);
-        holder.nameTxt.setText(group.getName());
+        final Appointment appointment = appointments.get(position);
+        holder.nameTxt.setText(appointment.getName() + ": " + appointment.getAppointmentDate() + " - " + appointment.getCity());
+
         holder.nameTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onGroupItemClick(v, group);
+                listener.onAppointmentItemClick(v, appointment);
             }
         });
     }
@@ -45,7 +46,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return groups.size();
+        return appointments.size();
     }
 
     class MyViewHolder extends ViewHolder {
