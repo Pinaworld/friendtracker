@@ -14,13 +14,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.pinbe.friendtracker.AppointmentAdapter;
-import com.example.pinbe.friendtracker.AppointmentCustomClickListener;
+import com.example.pinbe.friendtracker.Interfaces.AppointmentCustomClickListener;
 import com.example.pinbe.friendtracker.Fragments.AppointmentCreationFragment;
 import com.example.pinbe.friendtracker.Fragments.AppointmentFragment;
-import com.example.pinbe.friendtracker.GroupAdapter;
-import com.example.pinbe.friendtracker.GroupCustomClickListener;
-import com.example.pinbe.friendtracker.Fragments.GroupCreationFragment;
-import com.example.pinbe.friendtracker.Fragments.GroupFragment;
+import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.R;

@@ -8,4 +8,5 @@ public class Constants {
     public static final int DETECTION_INTERVAL_IN_MILLISECONDS = 100000;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 30000;
     public final static String LOCATION_UPDATE = "LOCATION_UPDATE";
+    public static String APPWIDGET_EXTRA="APPWIDGET";
 }

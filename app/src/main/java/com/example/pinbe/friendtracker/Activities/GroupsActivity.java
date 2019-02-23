@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pinbe.friendtracker.GroupCustomClickListener;
+import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
 import com.example.pinbe.friendtracker.Fragments.GroupCreationFragment;
 import com.example.pinbe.friendtracker.Fragments.GroupFragment;
 import com.example.pinbe.friendtracker.GroupAdapter;

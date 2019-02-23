@@ -2,6 +2,8 @@ package com.example.pinbe.friendtracker.Fragments;
 
 
 import android.annotation.TargetApi;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.R;
+import com.google.firebase.components.Component;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
@@ -25,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -108,6 +112,7 @@ public class AppointmentCreationFragment extends Fragment {
         cal.set(Calendar.HOUR_OF_DAY, appointmentTime.getHour());
         cal.set(Calendar.MINUTE, appointmentTime.getMinute());
         cal.set(Calendar.MILLISECOND, 0);
+
         Date date = cal.getTime();
 
 
@@ -153,6 +158,7 @@ public class AppointmentCreationFragment extends Fragment {
             Toast.makeText(getContext(), "Le format du code postal n'est pas valide", Toast.LENGTH_SHORT).show();
             return false;
         }
+
 
         if(date.compareTo(new Date()) < 0){
             Toast.makeText(getContext(), "L'évènement ne peut pas avoir de date antérieure à celle d'aujourd'hui.", Toast.LENGTH_SHORT).show();
@@ -200,7 +206,7 @@ public class AppointmentCreationFragment extends Fragment {
 
                 Log.e("APPOINTMENT_CREATION", "Appointment data is changed: " + appointment.getName() + ", " + appointment.getDescription());
 
-                getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                updateWidget();
 
             }
 
@@ -210,6 +216,11 @@ public class AppointmentCreationFragment extends Fragment {
                 Log.e("APPOINTMENT_CREATION", "Failed to read appointùent", error.toException());
             }
         });
+    }
+
+    private void updateWidget() {
+
+
     }
 
     public void getGroupAndUserId(String groupId, String userId){

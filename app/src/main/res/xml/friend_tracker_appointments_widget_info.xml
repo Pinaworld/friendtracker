@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/friend_tracker_appointments_widget"
+    android:minWidth="200dp"
+    android:minHeight="200dp"
+    android:previewImage="@drawable/appointment"
+    android:autoAdvanceViewId="@+id/appWidgetListView"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="5000"
+    android:widgetCategory="home_screen"></appwidget-provider>

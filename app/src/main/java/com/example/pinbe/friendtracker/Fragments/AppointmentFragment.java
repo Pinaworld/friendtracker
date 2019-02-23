@@ -21,7 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +72,7 @@ public class AppointmentFragment extends Fragment {
         appointmentDateTime = inflatedView.findViewById(R.id.fragAppointmentDateTime);
         buttonFindItinerary = inflatedView.findViewById(R.id.buttonFindItinerary);
 
-        Query query = mFirebaseDatabase.child("Group").equalTo(groupId);
+        Query query = mFirebaseDatabase.child("Group").orderByChild("id").equalTo(groupId);
 
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -104,7 +107,9 @@ public class AppointmentFragment extends Fragment {
         appointmentName.setText(appointment.getName());
         appointmentGroupName.setText(group.getName());
         appointmentAddress.setText(appointment.getAddress() + " " + appointment.getPostalCode() + " " + appointment.getCity());
-        appointmentDateTime.setText(appointment.getAppointmentDate().toString());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date date = appointment.getAppointmentDate();
+        appointmentDateTime.setText(dateFormat.format(date));
     }
 
     public void getAppointment(Appointment appointment){

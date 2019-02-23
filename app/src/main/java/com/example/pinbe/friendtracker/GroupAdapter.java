@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
 import com.example.pinbe.friendtracker.Models.Group;
 
 import java.util.ArrayList;
