@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.pinbe.friendtracker.ItineraryTask;
 import com.example.pinbe.friendtracker.Services.BackgroundDetectedActivitiesService;
 import com.example.pinbe.friendtracker.Constants;
 import com.example.pinbe.friendtracker.Fragments.MenuFriendsFragment;
@@ -42,6 +46,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+import java.util.Locale;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private Toolbar toolbar;
@@ -63,6 +70,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private String currentActivity;
     BroadcastReceiver broadcastReceiver;
+    private AsyncTask<Void, Integer, Boolean> itineraryTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +117,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         registerReceiver(broadcastReceiver, new IntentFilter(Constants.DETECTED_ACTIVITY));
         registerReceiver(broadcastReceiver, new IntentFilter(Constants.LOCATION_UPDATE));
+        registerReceiver(broadcastReceiver, new IntentFilter(Constants.ITINERARY_TASK));
     }
 
     @Override
@@ -188,11 +197,50 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
 
                 }
+
+                if (intent.getAction().equals(Constants.ITINERARY_TASK)) {
+                    if(googleMap != null){
+                        String destination = intent.getStringExtra("destination");
+                        String startAddress = getStrinAddressFromCurrentLocation();
+                        runItineraryTask(startAddress, destination);
+                    }
+                }
             }
         };
 
         registerReceiver(broadcastReceiver, new IntentFilter(Constants.DETECTED_ACTIVITY));
         registerReceiver(broadcastReceiver, new IntentFilter(Constants.LOCATION_UPDATE));
+        registerReceiver(broadcastReceiver, new IntentFilter(Constants.ITINERARY_TASK));
+
+    }
+
+    private void runItineraryTask(String start, String destination) {
+        itineraryTask = new ItineraryTask(this, googleMap, start, destination).execute();
+
+    }
+
+    private String getStrinAddressFromCurrentLocation() {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude(), 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                Log.i("Current address", strReturnedAddress.toString());
+            } else {
+                Log.w("Current address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Current address", "Canont get Address!");
+        }
+        return strAdd;
     }
 
     private void startServices() {
@@ -252,7 +300,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void setLocation(Location newLocation) {
-        if (newLocation != null) {
+        if (newLocation != null && marker != null) {
             mCurrentLocation = newLocation;
             LatLng location = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
 

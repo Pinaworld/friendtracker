@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
+
 public class GroupFragment extends Fragment {
 
     private TextView textView;
@@ -40,7 +42,7 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseInstance = getDatabase();
         mFirebaseDatabase =  mFirebaseInstance.getReference();
         // Inflate the layout for this fragment
         this.inflatedView = container;

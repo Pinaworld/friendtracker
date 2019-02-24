@@ -24,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
+
 public class WidgetListProvider implements RemoteViewsService.RemoteViewsFactory {
     private Context context = null;
     private int appWidgetId;
@@ -161,7 +163,7 @@ public class WidgetListProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public void onCreate()
     {
-        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseInstance = getDatabase();
         mFirebaseDatabase = mFirebaseInstance.getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

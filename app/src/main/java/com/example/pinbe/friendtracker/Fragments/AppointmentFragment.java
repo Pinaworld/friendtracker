@@ -1,6 +1,7 @@
 package com.example.pinbe.friendtracker.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.pinbe.friendtracker.Activities.MapsActivity;
+import com.example.pinbe.friendtracker.Constants;
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.R;
@@ -25,6 +28,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,7 +59,7 @@ public class AppointmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseInstance = getDatabase();
         mFirebaseDatabase =  mFirebaseInstance.getReference();
 
         // Inflate the layout for this fragment
@@ -98,7 +103,14 @@ public class AppointmentFragment extends Fragment {
         buttonFindItinerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String address = appointment.getAddress() + ", " + appointment.getPostalCode() + " " + appointment.getCity() + ", France\n";
 
+                Intent intent = new Intent(Constants.ITINERARY_TASK);
+                intent.putExtra("destination", address);
+                Intent i=new Intent(getContext(), MapsActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getContext().sendBroadcast(intent);
+                startActivity(i);
             }
         });
     }

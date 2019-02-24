@@ -9,4 +9,7 @@ public class Constants {
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 30000;
     public final static String LOCATION_UPDATE = "LOCATION_UPDATE";
     public static String APPWIDGET_EXTRA="APPWIDGET";
+    public static final String TOAST_MSG = "Calcul de l'itinéraire en cours";
+    public static final String TOAST_ERR_MAJ = "Impossible de trouver un itinéraire";
+    public static final String ITINERARY_TASK = "task_request";
 }
