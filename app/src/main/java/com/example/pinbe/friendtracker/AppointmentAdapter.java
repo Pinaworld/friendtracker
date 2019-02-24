@@ -11,7 +11,10 @@ import android.widget.Button;
 import com.example.pinbe.friendtracker.Interfaces.AppointmentCustomClickListener;
 import com.example.pinbe.friendtracker.Models.Appointment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.MyViewHolder> {
 
@@ -34,7 +37,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Appointment appointment = appointments.get(position);
-        holder.nameTxt.setText(appointment.getName() + ": " + appointment.getAppointmentDate() + " - " + appointment.getCity());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date date = appointment.getAppointmentDate();
+        String datStr = dateFormat.format(date);
+        holder.nameTxt.setText(appointment.getName() + ": " + datStr + " - " + appointment.getCity());
 
         holder.nameTxt.setOnClickListener(new View.OnClickListener() {
             @Override

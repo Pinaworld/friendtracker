@@ -42,7 +42,7 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(getContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference();
         // Inflate the layout for this fragment
         this.inflatedView = container;

@@ -48,7 +48,7 @@ public class GroupsActivity extends AppCompatActivity {
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         createGroupButton = findViewById(R.id.goToCreateGroupButton);
 
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(getApplicationContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Group");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -101,7 +101,6 @@ public class GroupsActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.groupFrameLayout, currentFragment)
                 .commit();
-
     }
 
     @Override

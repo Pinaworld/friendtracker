@@ -63,7 +63,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         group = (Group) intent.getSerializableExtra("Group");
         appointments = new ArrayList<>();
 
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(getApplicationContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

@@ -163,12 +163,11 @@ public class WidgetListProvider implements RemoteViewsService.RemoteViewsFactory
     @Override
     public void onCreate()
     {
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(context);
         mFirebaseDatabase = mFirebaseInstance.getReference();
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         updateWidgetListView();
-
     }
 
     @Override

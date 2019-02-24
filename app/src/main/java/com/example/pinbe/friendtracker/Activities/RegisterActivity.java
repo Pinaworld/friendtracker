@@ -42,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
 
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(getApplicationContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference();
 
         userFirebaseHelper = new UserFirebaseHelper(mFirebaseDatabase);

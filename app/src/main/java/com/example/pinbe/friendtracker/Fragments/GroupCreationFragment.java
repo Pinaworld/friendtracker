@@ -64,7 +64,7 @@ public class GroupCreationFragment extends Fragment {
         groupeDescription = inflatedView.findViewById(R.id.groupDescription);
 
         auth = FirebaseAuth.getInstance();
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(getContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Group");
 
         userId = auth.getCurrentUser().getUid();

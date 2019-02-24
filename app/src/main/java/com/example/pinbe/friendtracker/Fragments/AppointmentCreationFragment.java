@@ -4,9 +4,11 @@ package com.example.pinbe.friendtracker.Fragments;
 import android.annotation.TargetApi;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.R;
-import com.google.firebase.components.Component;
+import com.example.pinbe.friendtracker.Widget.FriendTrackerWidget;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
@@ -28,7 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -51,12 +52,15 @@ public class AppointmentCreationFragment extends Fragment {
 
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
+    private Context mContext;
 
     private Boolean saved=null;
     private ViewGroup inflatedView;
 
     private String groupId;
     private String userId;
+
+    private FragmentManager fragmentManager;
 
     public AppointmentCreationFragment() {
         // Required empty public constructor
@@ -72,10 +76,17 @@ public class AppointmentCreationFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+        fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(mContext);
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Appointment");
 
         createAppointmentButton = inflatedView.findViewById(R.id.createAppointmentButton);
@@ -206,7 +217,7 @@ public class AppointmentCreationFragment extends Fragment {
 
                 Log.e("APPOINTMENT_CREATION", "Appointment data is changed: " + appointment.getName() + ", " + appointment.getDescription());
 
-                updateWidget();
+                fragmentManager.beginTransaction().remove(fragment).commit();
 
             }
 
@@ -216,11 +227,6 @@ public class AppointmentCreationFragment extends Fragment {
                 Log.e("APPOINTMENT_CREATION", "Failed to read appointùent", error.toException());
             }
         });
-    }
-
-    private void updateWidget() {
-
-
     }
 
     public void getGroupAndUserId(String groupId, String userId){

@@ -59,7 +59,7 @@ public class AppointmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mFirebaseInstance = getDatabase();
+        mFirebaseInstance = getDatabase(inflater.getContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference();
 
         // Inflate the layout for this fragment
@@ -121,7 +121,8 @@ public class AppointmentFragment extends Fragment {
         appointmentAddress.setText(appointment.getAddress() + " " + appointment.getPostalCode() + " " + appointment.getCity());
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date date = appointment.getAppointmentDate();
-        appointmentDateTime.setText(dateFormat.format(date));
+        String datStr = dateFormat.format(date);
+        appointmentDateTime.setText(datStr);
     }
 
     public void getAppointment(Appointment appointment){
