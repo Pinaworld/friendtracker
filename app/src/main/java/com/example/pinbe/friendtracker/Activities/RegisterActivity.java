@@ -47,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         userFirebaseHelper = new UserFirebaseHelper(mFirebaseDatabase);
 
-
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
         inputFirstname = findViewById(R.id.firstname);
