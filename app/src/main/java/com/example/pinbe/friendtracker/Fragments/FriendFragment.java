@@ -83,6 +83,10 @@ public class FriendFragment extends Fragment {
         if(groupMembersId == null){
             groupMembersId = new ArrayList<>();
         }
+        if(groupMembersId.contains(user.getId())){
+            Toast.makeText(getContext(), "Déja membre du groupe !", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         groupMembersId.add(user.getId());
         group.setMembersId(groupMembersId);
@@ -96,6 +100,10 @@ public class FriendFragment extends Fragment {
         ArrayList<String> usersId = currentUser.getFriendsId();
         if(usersId == null){
             usersId = new ArrayList<>();
+        }
+        if(usersId.contains(user.getId())){
+            Toast.makeText(getContext(), "Déja votre amis !", Toast.LENGTH_SHORT).show();
+            return;
         }
         usersId.add(user.getId());
         currentUser.setFriendsId(usersId);
