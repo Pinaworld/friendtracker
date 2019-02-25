@@ -164,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.d("AUTHENTICATION", e.getMessage());
                 }
             });
-
+            Toast.makeText(getApplicationContext(), "Modifications sauvegardées!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
