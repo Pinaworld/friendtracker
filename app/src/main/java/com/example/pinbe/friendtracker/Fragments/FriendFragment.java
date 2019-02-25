@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pinbe.friendtracker.Activities.FriendsActivity;
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.Models.User;
@@ -87,6 +88,7 @@ public class FriendFragment extends Fragment {
         group.setMembersId(groupMembersId);
 
         mFirebaseDatabase.child("Group").child(group.getId()).setValue(group);
+        ((FriendsActivity)getActivity()).updateGroup(group);
         Toast.makeText(getContext(), "Membre Ajouté", Toast.LENGTH_SHORT).show();
     }
 
@@ -97,7 +99,6 @@ public class FriendFragment extends Fragment {
         }
         usersId.add(user.getId());
         currentUser.setFriendsId(usersId);
-
         mFirebaseDatabase.child("User").child(userId).setValue(currentUser);
         Toast.makeText(getContext(), "Amis Ajouté", Toast.LENGTH_SHORT).show();
     }

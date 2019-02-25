@@ -79,8 +79,6 @@ public class FriendsActivity extends AppCompatActivity {
 
     private void getAllFriends(){
         if(viewType.equals("View")){
-
-
             if(group != null){
                 getGroupFriends();
             }
@@ -227,4 +225,12 @@ public class FriendsActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+    public void updateGroup(Group group){
+        this.group = group;
+        if(viewType.equals("View")){
+            getGroupFriends();
+        }
+    }
+
 }
