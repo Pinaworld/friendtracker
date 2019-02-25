@@ -14,7 +14,7 @@ import android.widget.Button;
 import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
 import com.example.pinbe.friendtracker.Fragments.GroupCreationFragment;
 import com.example.pinbe.friendtracker.Fragments.GroupFragment;
-import com.example.pinbe.friendtracker.GroupAdapter;
+import com.example.pinbe.friendtracker.Adapters.GroupAdapter;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.R;
 import com.google.firebase.auth.FirebaseAuth;

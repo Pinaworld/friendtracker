@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,20 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
-import com.example.pinbe.friendtracker.Models.Group;
+import com.example.pinbe.friendtracker.Interfaces.AppointmentCustomClickListener;
+import com.example.pinbe.friendtracker.Models.Appointment;
+import com.example.pinbe.friendtracker.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder> {
+public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.MyViewHolder> {
 
     Context c;
-    ArrayList<Group> groups;
-    GroupCustomClickListener listener;
+    ArrayList<Appointment> appointments;
+    AppointmentCustomClickListener listener;
 
-    public GroupAdapter(Context c, ArrayList<Group> groups, GroupCustomClickListener listener) {
+    public AppointmentAdapter(Context c, ArrayList<Appointment> appointments, AppointmentCustomClickListener listener) {
         this.c = c;
-        this.groups = groups;
+        this.appointments = appointments;
         this.listener = listener;
     }
 
@@ -33,12 +37,16 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Group group = groups.get(position);
-        holder.nameTxt.setText(group.getName());
+        final Appointment appointment = appointments.get(position);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        Date date = appointment.getAppointmentDate();
+        String datStr = dateFormat.format(date);
+        holder.nameTxt.setText(appointment.getName() + ": " + datStr + " - " + appointment.getCity());
+
         holder.nameTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onGroupItemClick(v, group);
+                listener.onAppointmentItemClick(v, appointment);
             }
         });
     }
@@ -46,7 +54,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return groups.size();
+        return appointments.size();
     }
 
     class MyViewHolder extends ViewHolder {

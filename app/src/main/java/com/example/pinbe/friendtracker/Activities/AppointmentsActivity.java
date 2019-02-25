@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pinbe.friendtracker.AppointmentAdapter;
+import com.example.pinbe.friendtracker.Adapters.AppointmentAdapter;
 import com.example.pinbe.friendtracker.Interfaces.AppointmentCustomClickListener;
 import com.example.pinbe.friendtracker.Fragments.AppointmentCreationFragment;
 import com.example.pinbe.friendtracker.Fragments.AppointmentFragment;

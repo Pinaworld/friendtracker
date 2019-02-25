@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.pinbe.friendtracker.Fragments.FriendFragment;
-import com.example.pinbe.friendtracker.FriendsAdapter;
+import com.example.pinbe.friendtracker.Adapters.FriendsAdapter;
 import com.example.pinbe.friendtracker.Interfaces.UserCustomClickListener;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.Models.User;

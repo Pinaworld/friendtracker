@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,23 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.pinbe.friendtracker.Interfaces.AppointmentCustomClickListener;
-import com.example.pinbe.friendtracker.Models.Appointment;
+import com.example.pinbe.friendtracker.Interfaces.UserCustomClickListener;
+import com.example.pinbe.friendtracker.Models.User;
+import com.example.pinbe.friendtracker.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.MyViewHolder> {
+public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.MyViewHolder> {
 
     Context c;
-    ArrayList<Appointment> appointments;
-    AppointmentCustomClickListener listener;
+    ArrayList<User> users;
+    UserCustomClickListener listener;
 
-    public AppointmentAdapter(Context c, ArrayList<Appointment> appointments, AppointmentCustomClickListener listener) {
+    public FriendsAdapter(Context c, ArrayList<User> users, UserCustomClickListener listener) {
         this.c = c;
-        this.appointments = appointments;
+        this.users = users;
         this.listener = listener;
     }
 
@@ -36,16 +34,12 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Appointment appointment = appointments.get(position);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        Date date = appointment.getAppointmentDate();
-        String datStr = dateFormat.format(date);
-        holder.nameTxt.setText(appointment.getName() + ": " + datStr + " - " + appointment.getCity());
-
+        final User user = users.get(position);
+        holder.nameTxt.setText(user.getLastname() + " " +  user.getFirstname());
         holder.nameTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onAppointmentItemClick(v, appointment);
+                listener.onUserItemClick(v, user);
             }
         });
     }
@@ -53,7 +47,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public int getItemCount() {
-        return appointments.size();
+        return users.size();
     }
 
     class MyViewHolder extends ViewHolder {

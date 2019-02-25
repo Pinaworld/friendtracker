@@ -1,4 +1,4 @@
-package com.example.pinbe.friendtracker;
+package com.example.pinbe.friendtracker.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,21 +9,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.pinbe.friendtracker.Interfaces.GroupCustomClickListener;
-import com.example.pinbe.friendtracker.Interfaces.UserCustomClickListener;
 import com.example.pinbe.friendtracker.Models.Group;
-import com.example.pinbe.friendtracker.Models.User;
+import com.example.pinbe.friendtracker.R;
 
 import java.util.ArrayList;
 
-public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.MyViewHolder> {
+public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder> {
 
     Context c;
-    ArrayList<User> users;
-    UserCustomClickListener listener;
+    ArrayList<Group> groups;
+    GroupCustomClickListener listener;
 
-    public FriendsAdapter(Context c, ArrayList<User> users, UserCustomClickListener listener) {
+    public GroupAdapter(Context c, ArrayList<Group> groups, GroupCustomClickListener listener) {
         this.c = c;
-        this.users = users;
+        this.groups = groups;
         this.listener = listener;
     }
 
@@ -35,12 +34,12 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final User user = users.get(position);
-        holder.nameTxt.setText(user.getLastname() + " " +  user.getFirstname());
+        final Group group = groups.get(position);
+        holder.nameTxt.setText(group.getName());
         holder.nameTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onUserItemClick(v, user);
+                listener.onGroupItemClick(v, group);
             }
         });
     }
@@ -48,7 +47,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return groups.size();
     }
 
     class MyViewHolder extends ViewHolder {
