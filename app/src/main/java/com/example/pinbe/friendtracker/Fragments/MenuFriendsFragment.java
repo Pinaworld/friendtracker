@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.pinbe.friendtracker.Activities.AppointmentsActivity;
 import com.example.pinbe.friendtracker.Activities.FriendsActivity;
 import com.example.pinbe.friendtracker.R;
 
@@ -46,7 +47,20 @@ public class MenuFriendsFragment extends Fragment {
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), FriendsActivity.class));
+                Intent intent = new Intent(getContext(), FriendsActivity.class);
+                intent.putExtra("Type", "Amis");
+                intent.putExtra("ViewType", "View");
+                startActivity(intent);
+            }
+        });
+
+        addFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FriendsActivity.class);
+                intent.putExtra("Type", "Amis");
+                intent.putExtra("ViewType", "Search");
+                startActivity(intent);
             }
         });
     }

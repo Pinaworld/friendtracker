@@ -217,6 +217,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void runItineraryTask(String start, String destination) {
         itineraryTask = new ItineraryTask(this, googleMap, start, destination).execute();
 
+
     }
 
     private String getStrinAddressFromCurrentLocation() {

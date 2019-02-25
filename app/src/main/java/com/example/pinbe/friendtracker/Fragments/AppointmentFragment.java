@@ -108,9 +108,7 @@ public class AppointmentFragment extends Fragment {
                 Intent intent = new Intent(Constants.ITINERARY_TASK);
                 intent.putExtra("destination", address);
                 Intent i=new Intent(getContext(), MapsActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 getContext().sendBroadcast(intent);
-                startActivity(i);
             }
         });
     }

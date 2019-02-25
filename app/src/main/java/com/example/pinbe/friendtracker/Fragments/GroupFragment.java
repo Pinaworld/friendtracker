@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.pinbe.friendtracker.Activities.AppointmentsActivity;
+import com.example.pinbe.friendtracker.Activities.FriendsActivity;
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.R;
@@ -24,6 +25,7 @@ public class GroupFragment extends Fragment {
 
     private TextView textView;
     private Button addMembersButton;
+    private Button viewMembersButton;
     private Button groupAppointmentButton;
     private Button groupMapButton;
     private Button buttonGroupParameters;
@@ -56,6 +58,7 @@ public class GroupFragment extends Fragment {
 
         textView = inflatedView.findViewById(R.id.fragGroupName);
         addMembersButton = inflatedView.findViewById(R.id.buttonGroupAddMembers);
+        viewMembersButton = inflatedView.findViewById(R.id.buttonGroupViewMembers);
         groupAppointmentButton = inflatedView.findViewById(R.id.buttonNextAppointments);
         groupMapButton = inflatedView.findViewById(R.id.buttonViewGroupMap);
         groupMapButton = inflatedView.findViewById(R.id.buttonGroupParameters);
@@ -74,7 +77,24 @@ public class GroupFragment extends Fragment {
         addMembersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FriendsActivity.class);
+                intent.putExtra("Group", group);
+                intent.putExtra("Type", "Membres");
+                intent.putExtra("ViewType", "Search");
 
+                startActivity(intent);
+            }
+        });
+
+        viewMembersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FriendsActivity.class);
+                intent.putExtra("Group", group);
+                intent.putExtra("Type", "Membres");
+                intent.putExtra("ViewType", "View");
+
+                startActivity(intent);
             }
         });
 

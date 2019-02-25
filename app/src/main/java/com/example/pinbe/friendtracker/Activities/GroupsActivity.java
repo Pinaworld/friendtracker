@@ -52,7 +52,7 @@ public class GroupsActivity extends AppCompatActivity {
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Group");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        Query query = mFirebaseDatabase.orderByChild("members");
+        Query query = mFirebaseDatabase.orderByChild("membersId");
 
         query.addValueEventListener(new ValueEventListener() {
             @Override

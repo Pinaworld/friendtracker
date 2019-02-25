@@ -1,6 +1,7 @@
 package com.example.pinbe.friendtracker.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -9,7 +10,8 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String phoneNumber;
-    private List<String> friendsId;
+    private ArrayList<String> friendsId;
+    private String id;
 
     // Default constructor required for calls to database
     public User() {
@@ -21,6 +23,15 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        friendsId = new ArrayList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -63,11 +74,11 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getFriendsId() {
+    public ArrayList<String> getFriendsId() {
         return friendsId;
     }
 
-    public void setFriendsId(List<String> friendsId) {
+    public void setFriendsId(ArrayList<String> friendsId) {
         this.friendsId = friendsId;
     }
 }

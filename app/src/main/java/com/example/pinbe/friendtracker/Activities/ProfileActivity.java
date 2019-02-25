@@ -74,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnSignup = findViewById(R.id.btn_signup);
         btnLogin = findViewById(R.id.btn_login);
 
-        btnSignup.setText("Sauvegarder les modifications");
+        btnSignup.setText("Sauvegarder");
         btnLogin.setVisibility(View.GONE);
 
         auth = FirebaseAuth.getInstance();

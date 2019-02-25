@@ -151,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         User user = new User(firstname, lastname, email, password, phoneNumber);
-
+        user.setId(userId);
         userFirebaseHelper.save(user, userId);
     }
 

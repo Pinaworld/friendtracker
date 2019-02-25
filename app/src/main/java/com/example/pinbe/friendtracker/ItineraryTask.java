@@ -81,7 +81,9 @@ public class ItineraryTask extends AsyncTask<Void, Integer, Boolean> {
 
             //On récupère d'abord le status de la requête
             final String status = document.getElementsByTagName("status").item(0).getTextContent();
+
             if(!"OK".equals(status)) {
+                final String message = document.getElementsByTagName("error_message").item(0).getTextContent();
                 return false;
             }
 
