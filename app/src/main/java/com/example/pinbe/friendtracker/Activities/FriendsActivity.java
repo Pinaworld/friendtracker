@@ -47,6 +47,7 @@ public class FriendsActivity extends AppCompatActivity {
     private User currentUser;
     private Group group;
     private String viewType;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class FriendsActivity extends AppCompatActivity {
         friends = new ArrayList<>();
         Intent intent = getIntent();
         group = (Group) intent.getSerializableExtra("Group");
-        String type = intent.getStringExtra("Type");
+        type = intent.getStringExtra("Type");
         viewType = intent.getStringExtra("ViewType");
 
         typeTxtView.setText(type);
@@ -117,22 +118,15 @@ public class FriendsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
-                    ArrayList<User> users = new ArrayList<>();
+                    friends = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         User user = ds.getValue(User.class);
                         if(!user.getId().equals(currentUser.getId()) && (user.getFirstname().contains(text) || user.getLastname().contains(text))){
-                            users.add(user);
+                            friends.add(user);
                         }
                     }
 
-                    userRecyclerView.setAdapter(new FriendsAdapter(getApplicationContext(), users, new UserCustomClickListener() {
-                        @Override
-                        public void onUserItemClick(View v, User user) {
-                            if(viewType.equals("Search")){
-                                setUserFragment(user);
-                            }
-                        }
-                    }));
+                    setAdapter();
                 }catch(Exception e){
                     Log.i("ERROR", e.getMessage());
                 }
@@ -185,22 +179,16 @@ public class FriendsActivity extends AppCompatActivity {
 
     private void getFriends(String id){
         Query query = mFirebaseDatabase.child(id);
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 try {
                     User user = dataSnapshot.getValue(User.class);
-                    friends.add(user);
-                    userRecyclerView.setAdapter(new FriendsAdapter(getApplicationContext(), friends, new UserCustomClickListener() {
-                        @Override
-                        public void onUserItemClick(View v, User user) {
-                            if(viewType.equals("Search")){
-                                setUserFragment(user);
-                            }
-                        }
-                    }));
+                    if(viewType.equals("View")){
+                        friends.add(user);
+                    }
+                    setAdapter();
                 } catch (Exception e) {
                     Log.i("ERROR", e.getMessage());
                 }
@@ -213,9 +201,18 @@ public class FriendsActivity extends AppCompatActivity {
         });
     }
 
+    private void setAdapter(){
+        userRecyclerView.setAdapter(new FriendsAdapter(getApplicationContext(), friends, new UserCustomClickListener() {
+            @Override
+            public void onUserItemClick(View v, User user) {
+                setUserFragment(user);
+            }
+        }));
+    }
+
     private void setUserFragment(User user) {
         currentFragment = new FriendFragment();
-        ((FriendFragment) currentFragment).getFriend(user, group, currentUser);
+        ((FriendFragment) currentFragment).setData(user, group, currentUser, viewType);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.userFrameLayout, currentFragment)
                 .commit();
@@ -226,10 +223,33 @@ public class FriendsActivity extends AppCompatActivity {
         finish();
     }
 
+    private void clearFriendsList(){
+        if(friends != null){
+            friends.clear();
+        }
+    }
+
     public void updateGroup(Group group){
         this.group = group;
+        if(group.getMembersId().size() == 0){
+            clearFriendsList();
+            setAdapter();
+        }
         if(viewType.equals("View")){
+            clearFriendsList();
             getGroupFriends();
+        }
+    }
+
+    public void updateUser(User user){
+        currentUser = user;
+        if(currentUser.getFriendsId().size() == 0){
+            clearFriendsList();
+            setAdapter();
+        }
+        if(viewType.equals("View")) {
+            clearFriendsList();
+            getUserFriends();
         }
     }
 

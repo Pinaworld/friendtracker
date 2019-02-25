@@ -37,6 +37,7 @@ public class FriendFragment extends Fragment {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
+    private String type;
 
     public FriendFragment() {
         // Required empty public constructor
@@ -62,20 +63,58 @@ public class FriendFragment extends Fragment {
         addButton = inflatedView.findViewById(R.id.addButton);
         userInfo = inflatedView.findViewById(R.id.userInfo);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(group == null){
-                    addFriend();
-                }
-                else{
-                    addMember();
-                }
+        if(type.equals("View")){
+            if(group == null){
+                addButton.setText("Retirer des amis");
+            }
+            else{
+                addButton.setText("Retirer des membres");
 
             }
-        });
+
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(group == null){
+                        removeFriend();
+                    }
+                    else{
+                        removeMember();
+                    }
+                }
+            });
+        }
+        else{
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(group == null){
+                        addFriend();
+                    }
+                    else{
+                        addMember();
+                    }
+                }
+            });
+        }
 
         userInfo.setText(user.getFirstname() + " " + user.getLastname());
+    }
+
+    private void removeMember() {
+        ArrayList<String> groupMembersId = group.getMembersId();
+
+        groupMembersId.remove(user.getId());
+        group.setMembersId(groupMembersId);
+        updateGroup();
+    }
+
+    private void removeFriend() {
+        ArrayList<String> usersId = currentUser.getFriendsId();
+
+        usersId.remove(user.getId());
+        currentUser.setFriendsId(usersId);
+        updateUser();
     }
 
     private void addMember() {
@@ -90,10 +129,7 @@ public class FriendFragment extends Fragment {
 
         groupMembersId.add(user.getId());
         group.setMembersId(groupMembersId);
-
-        mFirebaseDatabase.child("Group").child(group.getId()).setValue(group);
-        ((FriendsActivity)getActivity()).updateGroup(group);
-        Toast.makeText(getContext(), "Membre Ajouté", Toast.LENGTH_SHORT).show();
+        updateGroup();
     }
 
     private void addFriend() {
@@ -107,13 +143,38 @@ public class FriendFragment extends Fragment {
         }
         usersId.add(user.getId());
         currentUser.setFriendsId(usersId);
-        mFirebaseDatabase.child("User").child(userId).setValue(currentUser);
-        Toast.makeText(getContext(), "Amis Ajouté", Toast.LENGTH_SHORT).show();
+        updateUser();
+
     }
 
-    public void getFriend(User user, Group group, User currentUser){
+    private void updateGroup(){
+        mFirebaseDatabase.child("Group").child(group.getId()).setValue(group);
+        ((FriendsActivity)getActivity()).updateGroup(group);
+        if(type.equals("View")) {
+            Toast.makeText(getContext(), "Membre Retiré", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getContext(), "Membre Ajouté", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateUser(){
+        mFirebaseDatabase.child("User").child(userId).setValue(currentUser);
+        ((FriendsActivity)getActivity()).updateUser(currentUser);
+
+        if(type.equals("View")) {
+            Toast.makeText(getContext(), "Amis Retiré", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getContext(), "Amis Ajouté", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void setData(User user, Group group, User currentUser, String type){
         this.user = user;
         this.group = group;
         this.currentUser = currentUser;
+        this.type = type;
     }
 }

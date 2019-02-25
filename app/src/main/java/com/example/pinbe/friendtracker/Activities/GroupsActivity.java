@@ -62,7 +62,7 @@ public class GroupsActivity extends AppCompatActivity {
                 try{
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         Group group = ds.getValue(Group.class);
-                        if(group.getMembersId().contains(userId)){
+                        if(group.getMembersId().contains(userId) || group.getOwnerId().equals(userId)){
                             groups.add(group);
                         }
                     }
