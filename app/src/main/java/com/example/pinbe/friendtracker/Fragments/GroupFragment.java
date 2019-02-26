@@ -1,8 +1,10 @@
 package com.example.pinbe.friendtracker.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,7 @@ public class GroupFragment extends Fragment {
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
+    private FragmentManager fragmentManager;
 
 
     public GroupFragment() {
@@ -75,6 +78,12 @@ public class GroupFragment extends Fragment {
         textView.setText(group.getName());
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragmentManager = getActivity().getSupportFragmentManager();
+    }
+
     public void getGroup(Group group){
         this.group = group;
 
@@ -87,9 +96,9 @@ public class GroupFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FriendsActivity.class);
                 intent.putExtra("Group", group);
-                intent.putExtra("Type", "Membres");
+                intent.putExtra("Type", "Ajout de membres");
                 intent.putExtra("ViewType", "Search");
-
+                removeFragment();
                 startActivity(intent);
             }
         });
@@ -99,9 +108,9 @@ public class GroupFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FriendsActivity.class);
                 intent.putExtra("Group", group);
-                intent.putExtra("Type", "Membres");
+                intent.putExtra("Type", "Membres du groupe");
                 intent.putExtra("ViewType", "View");
-
+                removeFragment();
                 startActivity(intent);
             }
         });
@@ -112,7 +121,7 @@ public class GroupFragment extends Fragment {
 
                 Intent intent = new Intent(getContext(), AppointmentsActivity.class);
                 intent.putExtra("Group", group);
-
+                removeFragment();
                 startActivity(intent);
             }
         });
@@ -130,6 +139,12 @@ public class GroupFragment extends Fragment {
 
             }
         });
+    }
+
+    private void removeFragment() {
+        final Fragment fragment = GroupFragment.this;
+        fragmentManager.beginTransaction().remove(fragment).commit();
+
     }
 
 }

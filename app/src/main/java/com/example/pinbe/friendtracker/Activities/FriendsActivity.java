@@ -72,7 +72,7 @@ public class FriendsActivity extends AppCompatActivity {
 
         setSearchingViewListener();
 
-        if(viewType.equals("View")) {
+        if(viewType.equals("View") || group != null) {
             searchingView.setVisibility(View.GONE);
         }
         getAllFriends();
@@ -149,9 +149,7 @@ public class FriendsActivity extends AppCompatActivity {
 
                 try {
                     currentUser = dataSnapshot.getValue(User.class);
-                    if(group == null){
-                        getUserFriends();
-                    }
+                    getUserFriends();
                 } catch (Exception e) {
                     Log.i("ERROR", e.getMessage());
                 }
@@ -185,10 +183,11 @@ public class FriendsActivity extends AppCompatActivity {
 
                 try {
                     User user = dataSnapshot.getValue(User.class);
-                    if(viewType.equals("View")){
+                    if(viewType.equals("View") || group != null){
                         friends.add(user);
                     }
                     setAdapter();
+
                 } catch (Exception e) {
                     Log.i("ERROR", e.getMessage());
                 }

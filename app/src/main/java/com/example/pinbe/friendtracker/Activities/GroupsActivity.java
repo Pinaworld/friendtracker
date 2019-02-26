@@ -52,8 +52,27 @@ public class GroupsActivity extends AppCompatActivity {
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Group");
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        Query query = mFirebaseDatabase.orderByChild("membersId");
+        getGroup();
 
+        createGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentFragment = new GroupCreationFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.groupFrameLayout, currentFragment)
+                        .commit();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getGroup();
+    }
+
+    private void getGroup(){
+        Query query = mFirebaseDatabase.orderByChild("membersId");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -81,16 +100,6 @@ public class GroupsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-        createGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentFragment = new GroupCreationFragment();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.groupFrameLayout, currentFragment)
-                        .commit();
             }
         });
     }

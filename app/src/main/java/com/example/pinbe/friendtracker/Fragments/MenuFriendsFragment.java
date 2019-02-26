@@ -48,7 +48,7 @@ public class MenuFriendsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FriendsActivity.class);
-                intent.putExtra("Type", "Amis");
+                intent.putExtra("Type", "Mes amis");
                 intent.putExtra("ViewType", "View");
                 startActivity(intent);
             }
@@ -58,7 +58,7 @@ public class MenuFriendsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FriendsActivity.class);
-                intent.putExtra("Type", "Amis");
+                intent.putExtra("Type", "Recherche d'amis");
                 intent.putExtra("ViewType", "Search");
                 startActivity(intent);
             }
