@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -74,6 +75,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("THEME", android.content.Context.MODE_PRIVATE);
+        String theme = pref.getString("my_theme", "");
+        switch(theme){
+            case "theme1":
+                getTheme().applyStyle(R.style.theme1, true);
+                break;
+            case "theme2":
+                getTheme().applyStyle(R.style.theme2, true);
+                break;
+            default:
+                break;
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
@@ -97,7 +112,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -376,6 +390,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (id) {
             case R.id.menu_groups:
                 currentMenuFragment = new MenuGroupFragment();
+
                 break;
             case R.id.menu_friends:
                 currentMenuFragment = new MenuFriendsFragment();

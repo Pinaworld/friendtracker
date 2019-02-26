@@ -42,6 +42,7 @@ public class MenuGroupFragment extends Fragment {
         groupsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(getContext(), GroupsActivity.class));
             }
         });
