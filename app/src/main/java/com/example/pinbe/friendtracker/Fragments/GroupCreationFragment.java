@@ -1,8 +1,10 @@
 package com.example.pinbe.friendtracker.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,15 +34,20 @@ import static com.example.pinbe.friendtracker.Database.Database.getDatabase;
 public class GroupCreationFragment extends Fragment {
 
     private Button createGroupButton;
+    private Button deleteGroupButton;
     private EditText groupName;
     private EditText groupeDescription;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth auth;
+
     private Boolean saved=null;
     private ViewGroup inflatedView;
-
+    private Group group;
+    private Boolean viewForModification;
     private String userId;
+    private FragmentManager fragmentManager;
+
 
     public GroupCreationFragment() {
         // Required empty public constructor
@@ -52,7 +59,14 @@ public class GroupCreationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.inflatedView = container;
+
         return inflater.inflate(R.layout.fragment_group_creation, container, false);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
     @Override
@@ -60,6 +74,8 @@ public class GroupCreationFragment extends Fragment {
         super.onStart();
 
         createGroupButton = inflatedView.findViewById(R.id.createGroupButton);
+        deleteGroupButton = inflatedView.findViewById(R.id.deleteGroupButton);
+        deleteGroupButton.setVisibility(View.GONE);
         groupName = inflatedView.findViewById(R.id.groupName);
         groupeDescription = inflatedView.findViewById(R.id.groupDescription);
 
@@ -68,13 +84,61 @@ public class GroupCreationFragment extends Fragment {
         mFirebaseDatabase =  mFirebaseInstance.getReference().child("Group");
 
         userId = auth.getCurrentUser().getUid();
+        
+        if(viewForModification == null){
+            createGroupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    createGroup();
+                }
+            });
+        }
+        else{
+            deleteGroupButton.setVisibility(View.VISIBLE);
+            createGroupButton.setText("Modifier le groupe");
+            createGroupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    modififyGroup();
+                }
+            });
+            deleteGroupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteGroup();
+                }
+            });
+            setTextViews();
+        }
+    }
 
-        createGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createGroup();
-            }
-        });
+    private void modififyGroup() {
+        final String name = groupName.getText().toString();
+        final String description = groupeDescription.getText().toString();
+
+        Boolean inputsAreValid = validateInputs(name);
+
+        if(inputsAreValid) {
+            group.setName(name);
+            group.setDescription(description);
+
+            mFirebaseDatabase.child(group.getId()).setValue(group);
+            removeFragment();
+            Toast.makeText(getContext(), "Groupe modifié.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteGroup() {
+        mFirebaseDatabase.child(group.getId()).removeValue();
+        removeFragment();
+        Toast.makeText(getContext(), "Groupe supprimé.",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void setTextViews(){
+        groupName.setText(group.getName());
+        groupeDescription.setText(group.getDescription());
     }
 
     private void createGroup(){
@@ -125,12 +189,19 @@ public class GroupCreationFragment extends Fragment {
             addGroupChangeListener(group);
 
             saved=true;
+
+            removeFragment();
         }catch (DatabaseException e)
         {
             e.printStackTrace();
             saved=false;
         }
         return saved;
+    }
+
+    private void removeFragment() {
+        final Fragment fragment = GroupCreationFragment.this;
+        fragmentManager.beginTransaction().remove(fragment).commit();
     }
 
     private void addGroupChangeListener(Group group) {
@@ -156,6 +227,11 @@ public class GroupCreationFragment extends Fragment {
                 Log.e("GROUP_CREATION", "Failed to read user", error.toException());
             }
         });
+    }
+
+    public void getGroupForModification(Group group){
+        this.group = group;
+        viewForModification = true;
     }
 
 }

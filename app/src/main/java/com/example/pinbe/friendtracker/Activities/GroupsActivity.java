@@ -103,6 +103,14 @@ public class GroupsActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void setFragmentForModification(Group group) {
+        currentFragment = new GroupCreationFragment();
+        ((GroupCreationFragment) currentFragment).getGroupForModification(group);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.groupFrameLayout, currentFragment)
+                .commit();
+    }
+
     @Override
     public void onBackPressed() {
         finish();

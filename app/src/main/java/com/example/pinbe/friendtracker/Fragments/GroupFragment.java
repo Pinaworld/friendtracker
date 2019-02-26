@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.example.pinbe.friendtracker.Activities.AppointmentsActivity;
 import com.example.pinbe.friendtracker.Activities.FriendsActivity;
+import com.example.pinbe.friendtracker.Activities.GroupsActivity;
 import com.example.pinbe.friendtracker.Models.Appointment;
 import com.example.pinbe.friendtracker.Models.Group;
 import com.example.pinbe.friendtracker.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,6 +36,7 @@ public class GroupFragment extends Fragment {
     private Group group;
     private DatabaseReference mFirebaseDatabase;
     private FirebaseDatabase mFirebaseInstance;
+    private String userId;
 
 
     public GroupFragment() {
@@ -46,6 +49,7 @@ public class GroupFragment extends Fragment {
 
         mFirebaseInstance = getDatabase(getContext());
         mFirebaseDatabase =  mFirebaseInstance.getReference();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         // Inflate the layout for this fragment
         this.inflatedView = container;
         return inflater.inflate(R.layout.fragment_group, container, false);
@@ -61,8 +65,11 @@ public class GroupFragment extends Fragment {
         viewMembersButton = inflatedView.findViewById(R.id.buttonGroupViewMembers);
         groupAppointmentButton = inflatedView.findViewById(R.id.buttonNextAppointments);
         groupMapButton = inflatedView.findViewById(R.id.buttonViewGroupMap);
-        groupMapButton = inflatedView.findViewById(R.id.buttonGroupParameters);
+        buttonGroupParameters = inflatedView.findViewById(R.id.buttonGroupParameters);
 
+        if(!group.getOwnerId().equals(userId)){
+            buttonGroupParameters.setVisibility(View.GONE);
+        }
         setButtonsOnClickLIsteners();
 
         textView.setText(group.getName());
@@ -72,6 +79,7 @@ public class GroupFragment extends Fragment {
         this.group = group;
 
     }
+
 
     private void setButtonsOnClickLIsteners() {
         addMembersButton.setOnClickListener(new View.OnClickListener() {
@@ -109,10 +117,10 @@ public class GroupFragment extends Fragment {
             }
         });
 
-        groupMapButton.setOnClickListener(new View.OnClickListener() {
+        buttonGroupParameters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((GroupsActivity)getActivity()).setFragmentForModification(group);
             }
         });
 

@@ -1,8 +1,10 @@
 package com.example.pinbe.friendtracker.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public class FriendFragment extends Fragment {
     private FirebaseDatabase mFirebaseInstance;
     private String userId;
     private String type;
+    private FragmentManager fragmentManager;
 
     public FriendFragment() {
         // Required empty public constructor
@@ -54,6 +57,12 @@ public class FriendFragment extends Fragment {
         // Inflate the layout for this fragment
         this.inflatedView = container;
         return inflater.inflate(R.layout.fragment_friend, container, false);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragmentManager = getActivity().getSupportFragmentManager();
     }
 
     @Override
@@ -99,6 +108,11 @@ public class FriendFragment extends Fragment {
         }
 
         userInfo.setText(user.getFirstname() + " " + user.getLastname());
+    }
+
+    private void removeFragment() {
+        final Fragment fragment = FriendFragment.this;
+        fragmentManager.beginTransaction().remove(fragment).commit();
     }
 
     private void removeMember() {
@@ -150,7 +164,9 @@ public class FriendFragment extends Fragment {
     private void updateGroup(){
         mFirebaseDatabase.child("Group").child(group.getId()).setValue(group);
         ((FriendsActivity)getActivity()).updateGroup(group);
+        removeFragment();
         if(type.equals("View")) {
+
             Toast.makeText(getContext(), "Membre Retiré", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -161,7 +177,7 @@ public class FriendFragment extends Fragment {
     private void updateUser(){
         mFirebaseDatabase.child("User").child(userId).setValue(currentUser);
         ((FriendsActivity)getActivity()).updateUser(currentUser);
-
+        removeFragment();
         if(type.equals("View")) {
             Toast.makeText(getContext(), "Amis Retiré", Toast.LENGTH_SHORT).show();
         }
