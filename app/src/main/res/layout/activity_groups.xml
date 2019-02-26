@@ -31,7 +31,8 @@
                 android:id="@+id/goToCreateGroupButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Créer un groupe"/>
+                android:text="Créer un groupe"
+                android:textAllCaps="false" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/groupRecyclerView"

@@ -13,7 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <string name="hint_email">Adresse Mail</string>
-    <string name="hint_password">Saisissez votre mot de passe</string>
+    <string name="hint_password">Mot de passe</string>
     <string name="hint_firstname">Nom</string>
     <string name="hint_lastname">Prénom</string>
     <string name="hint_phoneNumber">Téléphone</string>
