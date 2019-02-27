@@ -10,7 +10,7 @@
     <string name="title_activity_parameters">Paramètres de l\'application</string>
     <string name="title_activity_profile">Mon profil</string>
 
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
 
     <string name="hint_email">Adresse Mail</string>
     <string name="hint_password">Mot de passe</string>
@@ -53,7 +53,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
 
-    <string name="THEME1">Par défaut</string>
-    <string name="THEME2">Thème 1</string>
-    <string name="THEME3">Thème 2</string>
+    <string name="THEME1">Thème principal</string>
+    <string name="THEME2">Thème sombre</string>
+    <string name="THEME3">Thème gillet jaune</string>
 </resources>

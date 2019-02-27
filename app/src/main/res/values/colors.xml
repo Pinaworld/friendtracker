@@ -2,6 +2,14 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#FFFFFF</color>
     <color name="yellow">#ffff00</color>
+    <color name="dark_yellow">#C5C500</color>
+    <color name="yellowAccent">#000000</color>
+    <color name="darkThemeMain">#22358A</color>
+    <color name="darkThemeSecond">#252F50</color>
+    <color name="darkThemeThird">#0073FF</color>
+    <color name="recyclerButtonBackground">#C7C7C7</color>
+    <color name="recyclerCardBackground">#FFFFFF</color>
+    <color name="recyclerButtonText">#FFFFFF</color>
 </resources>

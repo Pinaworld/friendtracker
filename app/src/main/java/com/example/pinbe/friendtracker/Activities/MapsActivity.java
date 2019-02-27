@@ -80,10 +80,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         String theme = pref.getString("my_theme", "");
         switch(theme){
             case "theme1":
-                getTheme().applyStyle(R.style.theme1, true);
+                setTheme(R.style.theme1);
                 break;
             case "theme2":
-                getTheme().applyStyle(R.style.theme2, true);
+                setTheme(R.style.theme2);
+                break;
+            case "default":
+                setTheme(R.style.AppTheme);
                 break;
             default:
                 break;

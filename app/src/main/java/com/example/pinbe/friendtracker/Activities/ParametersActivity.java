@@ -31,6 +31,21 @@ public class ParametersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("THEME", android.content.Context.MODE_PRIVATE);
+        String theme = pref.getString("my_theme", "");
+        switch (theme) {
+            case "theme1":
+                setTheme(R.style.theme1);
+                break;
+            case "theme2":
+                setTheme(R.style.theme2);
+                break;
+            case "default":
+                setTheme(R.style.AppTheme);
+                break;
+            default:
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parameters);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,13 +60,16 @@ public class ParametersActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("THEME", android.content.Context.MODE_PRIVATE);
         editor = pref.edit();
 
-        currentTheme = pref.getString("my_theme", "");
+        currentTheme = pref.getString("my_theme", "default");
 
         switch(currentTheme){
             case "theme1":
                 theme1Switch.setChecked(true);
                 break;
             case "theme2":
+                theme2Switch.setChecked(true);
+                break;
+            case "default":
                 theme2Switch.setChecked(true);
                 break;
             default:
@@ -64,10 +82,13 @@ public class ParametersActivity extends AppCompatActivity {
         validateParametersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!newTheme.equals(currentTheme)){
-                    restartApplication();
-                }
-                else{
+                if (newTheme != null) {
+                    if (!newTheme.equals(currentTheme)) {
+                        restartApplication();
+                    } else {
+                        finish();
+                    }
+                } else {
                     finish();
                 }
             }
@@ -83,7 +104,7 @@ public class ParametersActivity extends AppCompatActivity {
                 theme1Switch.setChecked(false);
                 theme2Switch.setChecked(false);
                 setSwitchListeners();
-                saveSelectedTheme("");
+                saveSelectedTheme("default");
             }
         });
 

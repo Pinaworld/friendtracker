@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimary"
         >
 
         <Button
@@ -20,6 +20,8 @@
             android:text="@string/friends_button"
             android:layout_marginRight="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent"
             />
 
         <Button
@@ -29,7 +31,9 @@
             android:drawableLeft="@drawable/add_friend"
             android:text="@string/friends_adding_button"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent" />
     </LinearLayout>
 
 

@@ -1,6 +1,7 @@
 package com.example.pinbe.friendtracker.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,21 @@ public class FriendsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("THEME", android.content.Context.MODE_PRIVATE);
+        String theme = pref.getString("my_theme", "");
+        switch (theme) {
+            case "theme1":
+                setTheme(R.style.theme1);
+                break;
+            case "theme2":
+                setTheme(R.style.theme2);
+                break;
+            case "default":
+                setTheme(R.style.AppTheme);
+                break;
+            default:
+                break;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 

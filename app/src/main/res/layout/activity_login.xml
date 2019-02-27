@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimaryDark"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
@@ -33,8 +33,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="?colorAccent"
+                android:textColorHint="?colorAccent" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -48,8 +48,8 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="?colorAccent"
+                android:textColorHint="?colorAccent" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -58,10 +58,10 @@
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:background="@android:color/black"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent"
             android:text="@string/btn_register"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
             android:textSize="15sp" />
 
         <Button
@@ -72,7 +72,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:textColor="?colorAccent" />
 
         <Button
             android:id="@+id/btn_reset_password"
@@ -82,7 +82,7 @@
             android:background="@null"
             android:text="@string/btn_forgot_password"
             android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:textColor="?colorAccent" />
 
     </LinearLayout>
 

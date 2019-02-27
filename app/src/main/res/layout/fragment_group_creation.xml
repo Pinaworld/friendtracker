@@ -8,34 +8,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="?colorPrimary">
 
         <EditText
             android:id="@+id/groupName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="Nom du groupe"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="?colorAccent" />
 
         <EditText
             android:id="@+id/groupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:ems="10"
             android:hint="Description du groupe"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="?colorAccent" />
 
         <Button
             android:id="@+id/createGroupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Créer le groupe" />
+            android:layout_margin="5dp"
+            android:text="Créer le groupe"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent" />
+
         <Button
             android:id="@+id/deleteGroupButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Supprimer le groupe" />
+            android:layout_margin="5dp"
+            android:background="?colorPrimary"
+            android:text="Supprimer le groupe"
+            android:textColor="?colorAccent" />
 
 
     </LinearLayout>

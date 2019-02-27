@@ -5,56 +5,59 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ParametersActivity">
+    tools:context=".Activities.ParametersActivity"
+    android:background="?colorPrimaryDark">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/themeTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
             android:text="Mes Thèmes"
             android:textAlignment="center"
-            android:textSize="20dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Switch
             android:id="@+id/defaultThemeSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/THEME1"
-            android:checked="false"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center"/>
+            android:checked="false"
+            android:text="@string/THEME1" />
 
         <Switch
             android:id="@+id/theme1Switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/THEME2"
-            android:checked="false"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center"/>
+            android:checked="false"
+            android:text="@string/THEME2" />
 
         <Switch
             android:id="@+id/theme2Switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/THEME3"
-            android:checked="false"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center"/>
+            android:checked="false"
+            android:text="@string/THEME3" />
 
     </LinearLayout>
 
@@ -62,7 +65,10 @@
         android:id="@+id/validateParametersButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="valider les changements" />
+        android:layout_margin="15dp"
+        android:background="?colorPrimary"
+        android:text="valider les changements"
+        android:textColor="?colorAccent" />
 
     <TextView
         android:id="@+id/messageWarning"

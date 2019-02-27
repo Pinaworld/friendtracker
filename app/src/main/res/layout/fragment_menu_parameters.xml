@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorPrimary"        >
+        android:background="?colorPrimary">
         <Button
             android:id="@+id/profileButton"
             android:layout_width="wrap_content"
@@ -18,16 +18,20 @@
             android:drawableLeft="@drawable/profile"
             android:layout_marginRight="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent"
             />
 
         <Button
             android:id="@+id/parametersButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/parameters_button"
+            android:layout_marginRight="10dp"
+            android:background="?colorPrimary"
             android:drawableLeft="@drawable/parameters"
+            android:text="@string/parameters_button"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:layout_marginRight="10dp" />
+            android:textColor="?colorAccent" />
 
         <ImageButton
             android:id="@+id/logoutButton"
@@ -35,6 +39,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/logout"
-            android:textAppearance="@style/TextAppearance.AppCompat" />
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:background="?colorPrimary"
+            android:textColor="?colorAccent" />
     </LinearLayout>
 </FrameLayout>

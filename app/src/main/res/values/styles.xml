@@ -14,6 +14,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.LinearLogin">
+        <item name="android:background">#009688</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -24,16 +28,26 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <style name="theme1">
-        <item name="colorPrimary">@color/yellow</item>
-        <item name="colorPrimaryDark">@android:color/darker_gray</item>
-        <item name="colorAccent">@android:color/darker_gray</item>
+        <item name="colorPrimary">@color/darkThemeMain</item>
+        <item name="colorPrimaryDark">@color/darkThemeSecond</item>
+        <item name="colorAccent">@color/darkThemeThird</item>
+        <item name="android:textColor">@color/darkThemeThird</item>
+    </style>
+
+    <style name="theme1.LinearLogin" parent="AppTheme.LinearLogin">
+        <item name="android:textColor">@color/darkThemeSecond</item>
     </style>
 
     <style name="theme2">
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/yellow</item>
-        <item name="colorAccent">@android:color/darker_gray</item>
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/dark_yellow</item>
+        <item name="colorAccent">@color/yellowAccent</item>
+    </style>
+
+    <style name="theme2.LinearLogin" parent="AppTheme.LinearLogin">
+        <item name="android:textColor">@color/dark_yellow</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
